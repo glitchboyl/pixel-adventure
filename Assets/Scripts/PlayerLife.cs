@@ -8,6 +8,9 @@ public class PlayerLife : MonoBehaviour
     private Rigidbody2D rb;
     private Animator anim;
 
+    [SerializeField]
+    private AudioSource deathSoundEffect;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -24,9 +27,9 @@ public class PlayerLife : MonoBehaviour
 
     private void Die()
     {
+        deathSoundEffect.Play();
         // 移除刚体组件，防止继续对玩家进行物理模拟
         Destroy(rb);
-
         anim.SetTrigger("death");
     }
 

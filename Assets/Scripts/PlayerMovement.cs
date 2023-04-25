@@ -28,6 +28,9 @@ public class PlayerMovement : MonoBehaviour
 
     private MovementState state = MovementState.falling;
 
+    [SerializeField]
+    private AudioSource jumpSoundEffect;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -40,12 +43,13 @@ public class PlayerMovement : MonoBehaviour
     {
         if (rb == null)
             return;
-            
+
         float dirX = Input.GetAxisRaw("Horizontal");
         rb.velocity = new Vector2(dirX * moveSpeed, rb.velocity.y);
 
         if (Input.GetButtonDown("Jump") && IsGrounded())
         {
+            jumpSoundEffect.Play();
             rb.velocity = new Vector3(rb.velocity.x, jumpForce, 0);
         }
 

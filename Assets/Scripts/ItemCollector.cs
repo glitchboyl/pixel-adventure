@@ -10,10 +10,14 @@ public class ItemCollector : MonoBehaviour
     [SerializeField]
     private TMP_Text bananasText;
 
+    [SerializeField]
+    private AudioSource collectSoundEffect;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Banana"))
         {
+            collectSoundEffect.Play();
             Destroy(collision.gameObject);
             bananasText.text = "Bananas:" + ++bananas;
         }
